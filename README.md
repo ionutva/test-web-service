@@ -22,6 +22,8 @@ http://localhost:8080/2018-11-12/metrics?words=ARE,YOU,FINE,HELLO,NOT
 
 Fields with invalid data are not taking in coount.
 
+If the order is wrong then rowsFieldsError is incremented and the current row is not counted in other metrics/kpis.
+
 Average call duration by country is calculated for the same origin country.
 
 Time for JSON proces is in miliseconds and is calculated just for the first access for an applicatio session.
