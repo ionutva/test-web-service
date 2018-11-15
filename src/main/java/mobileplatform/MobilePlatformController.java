@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.OptionalDouble;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestParam; 
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -46,7 +47,7 @@ public class MobilePlatformController {
 
     
     @RequestMapping("/{date}/metrics")
-    public Metrics metrics(@RequestParam(value="words", defaultValue="") String words, @PathVariable String date) {
+    public Metrics metrics(@RequestParam(value="words", defaultValue="") String words, @PathVariable String date) throws JSONException {
         long startTime = System.currentTimeMillis();
         long okCalls = 0;
         long koCalls = 0;
@@ -75,12 +76,23 @@ public class MobilePlatformController {
             JSONObject row = (JSONObject)callsArray.get(i);
             boolean containsMissingFields = false;
             boolean containsFieldsErrors = false;
+            boolean wrongOrder = false;
+            int arrayIndex = 0;
             for(String key: rowFieldsCallArray){
                 if(!row.has(key)){
                     containsMissingFields = true;
                     continue;
                 }
                 
+                try{
+                    if(!key.equals(row.names().get(arrayIndex++))){
+                         wrongOrder = true;
+                    }
+                }
+                catch(Exception e){
+                    wrongOrder = true;
+                }
+
                 //check if these fields are numbers
                 if(key.equals("timestamp") || key.equals("origin") || key.equals("destination") || key.equals("duration")){
                     try{
@@ -91,9 +103,10 @@ public class MobilePlatformController {
                     //}
                 }
                 
+                
             }
             
-            if(containsFieldsErrors){
+            if(containsFieldsErrors || wrongOrder){
                 
                 //increment number of rows with fields errors
                 metrics.setRowsFieldsError(metrics.getRowsFieldsError() + 1);
@@ -158,11 +171,23 @@ public class MobilePlatformController {
             JSONObject row = (JSONObject)msgArray.get(i);
             boolean containsMissingFields = false;
             boolean containsFieldsErrors = false;
+            boolean wrongOrder = false;
+            int arrayIndex = 0;
             for(String key: rowFieldsMsgArray){
                 if(!row.has(key)){
                     containsMissingFields = true;
                     continue;
                 }
+
+                try{
+                    if(!key.equals(row.names().get(arrayIndex++))){
+                         wrongOrder = true;
+                    }
+                }
+                catch(Exception e){
+                    wrongOrder = true;
+                }
+                
                 
                 if(key.equals("timestamp") || key.equals("origin") || key.equals("destination")){
                     try{
@@ -174,7 +199,7 @@ public class MobilePlatformController {
                 
             }
             
-            if(containsFieldsErrors){
+            if(containsFieldsErrors || wrongOrder){
                 //increment number of rows with fields errors
                 metrics.setRowsFieldsError(metrics.getRowsFieldsError() + 1);
                 continue;
