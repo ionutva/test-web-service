@@ -10,9 +10,8 @@
                         "status_description": "Great"
                     } ,
 					{
-                        "timestamp": 1517645701,                   
                         "message_type": "CALL",
-                        
+                        "timestamp": 1517645701,
                         "origin": 4077700001,
                         "destination": 755500002,
                         "duration": 12,
