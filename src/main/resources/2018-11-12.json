@@ -1,0 +1,78 @@
+{
+        "CALL": [
+                    {
+                        "message_type": "CALL",
+                        
+                        "origin": 4077700001,
+                        "destination": 755500001,
+                        "duration": 120,
+                        "status_code": "OK",
+                        "status_description": "Great"
+                    } ,
+					{
+                        "message_type": "CALL",
+                        "timestamp": 1517645701,
+                        "origin": 4077700001,
+                        "destination": 755500002,
+                        "duration": 12,
+                        "status_code": "OK",
+                        "status_description": "Good"
+                    } ,
+					{
+                        "message_type": "CALL",
+                        "timestamp": 1517645702,
+                        "origin": 755500001,
+                        "destination": 755500002,
+                        "duration": 20,
+                        "status_code": "KO",
+                        "status_description": "Good"
+                    } ,
+					{
+                        "message_type": "CALL",
+                        "timestamp": 1517645690,
+                        "origin": 755500001,
+                        "destination": 755500009,
+                        "duration": 34,
+                        "status_code": "OK",
+                        "status_description": "Bad"
+                    } 
+					
+                ],
+        "MSG": 
+                [   
+				    {
+                        "message_type": "MSG",
+                        "timestamp": 1517559332,
+                        "origin": 4077700001,
+                        "destination": 4077700002,
+                        "message_content": "Hi",
+                        "message_status": "DELIVERED"
+                    } ,
+					{
+                        "message_type": "MSG",
+                        "timestamp": 1517559334,
+                        "origin": 4077700001,
+                        "destination": 4077700001,
+                        "message_content": "Nice",
+                        "message_status": "SEEN"
+                    }  ,
+					{
+                        "message_type": "MSG",
+                        "timestamp": 1517559335,
+                        
+                        "destination": 755500009,
+                        "message_content": "How are you. Not good?",
+                        "message_status": "SEEN"
+                    } ,
+					{
+                        "message_type": "MSG",
+                        "timestamp": 1517559330,
+                        "origin": 755500009,
+                        "destination": 4077700001,
+                        "message_content": "are you ok?",
+                        "message_status": "SEEN"
+                    }
+					
+                ]
+}
+

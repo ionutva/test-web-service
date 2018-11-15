@@ -1,0 +1,8 @@
+---
+applications:
+- name: gs-rest-service
+  memory: 256M
+  instances: 1
+  host: rest-service
+  domain: guides.spring.io
+  path: build/libs/test-web-service-0.1.1.jar
